@@ -1,0 +1,20 @@
+{
+    "name": "asaed/refactoring-task",
+    "description": "jobleads refactoring task",
+    "authors": [
+        {
+            "name": "Ahmed Saed",
+            "email": "eng.ahmeds3ed@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "": "app/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.3"
+    }
+}
