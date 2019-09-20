@@ -20,6 +20,8 @@ if you have or at any other place into your project then use any function on it
 #### Notes: 
 1- Some functions in file "stringtouls.php" is repeated like concat and concatenate so I used one of them only. 
 
+2- I converted all functions to be static as all of them are utilities functions that can be called directly without need to get instance of the class.
+
 #### Todo:
 1- Apply Single Responsibility principal: split class into two classes one for StringUtils and the other for hashing.
 
