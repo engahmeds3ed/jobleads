@@ -2,6 +2,7 @@
 
 use App\Services\UserService;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
 {
@@ -17,7 +18,7 @@ class UsersTableSeeder extends Seeder
             $new_user = [
                 'name' => "JobLeads Admin",
                 'email' => 'admin@admin.com',
-                'password' => bcrypt('admin'),
+                'password' => "admin8766",
                 'email_verified_at' => date('Y-m-d H:i:s')
             ];
 
