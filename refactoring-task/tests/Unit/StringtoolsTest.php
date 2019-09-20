@@ -13,8 +13,7 @@ final class StringtoolsTest extends TestCase
      */
     public function testConcatTwoStrings(string $firstString, string $secondString, string $output)
     {
-        $stringtool = new Stringtools();
-        $this->assertEquals($output, $stringtool->concat($firstString, $secondString));
+        $this->assertEquals($output, Stringtools::concat($firstString, $secondString));
     }
 
     /**
@@ -25,8 +24,7 @@ final class StringtoolsTest extends TestCase
      */
     public function testConcatThreeStrings(string $firstString, string $secondString, string $thirdString, string $output)
     {
-        $stringtool = new Stringtools();
-        $this->assertEquals($output, $stringtool->concat($firstString, $secondString, $thirdString));
+        $this->assertEquals($output, Stringtools::concat($firstString, $secondString, $thirdString));
     }
 
     /**
@@ -36,8 +34,7 @@ final class StringtoolsTest extends TestCase
      */
     public function testWriteNewLine(string $line, string $output)
     {
-        $stringtool = new Stringtools();
-        $this->assertEquals($output, $stringtool->writeNewLine($line));
+        $this->assertEquals($output, Stringtools::writeNewLine($line));
     }
 
     /**
@@ -47,8 +44,7 @@ final class StringtoolsTest extends TestCase
      */
     public function testWriteNewLineHtml(string $line, string $output)
     {
-        $stringtool = new Stringtools();
-        $this->assertEquals($output, $stringtool->writeNewLine($line, true));
+        $this->assertEquals($output, Stringtools::writeNewLine($line, true));
     }
 
     /**
@@ -69,6 +65,48 @@ final class StringtoolsTest extends TestCase
     public function testLowerCase(string $word, string $output)
     {
         $this->assertEquals($output, Stringtools::lowerCase($word));
+    }
+
+    /**
+     * @param string $search
+     * @param string $replace
+     * @param string $input
+     * @param string $output
+     * @dataProvider getDataForReplace
+     */
+    public function testReplaceString(string $search, string $replace, string $input, string $output)
+    {
+        $this->assertEquals($output, Stringtools::replace($search, $replace, $input));
+    }
+
+    /**
+     * @param string $input
+     * @param string $output
+     * @dataProvider getDataForTrim
+     */
+    public function testTrim(string $input, string $output)
+    {
+        $this->assertEquals($output, Stringtools::trim($input));
+    }
+
+    /**
+     * @param string $input
+     * @param string $output
+     * @dataProvider getDataForMd5
+     */
+    public function testMd5(string $input, string $output)
+    {
+        $this->assertEquals($output, Stringtools::md5($input));
+    }
+
+    /**
+     * @param string $input
+     * @param string $output
+     * @dataProvider getDataForSha512
+     */
+    public function testSha512(string $input, string $output)
+    {
+        $this->assertEquals($output, Stringtools::sha512($input));
     }
 
     /**
@@ -126,6 +164,41 @@ final class StringtoolsTest extends TestCase
             ["aHmEd", "ahmed"],
             ["AHMED", "ahmed"],
             ["AhmeD1", "ahmed1"]
+        ];
+    }
+
+    public function getDataForReplace()
+    {
+        return [
+            ["a", "s", "ahmed", "shmed"],
+            ["ahmed", "", "ahmed saeed", " saeed"],
+            ["E", "e", "ahmEd saeEd", "ahmed saeed"]
+        ];
+    }
+
+    public function getDataForTrim()
+    {
+        return [
+            [" ahmed", "ahmed"],
+            [" ahmed ", "ahmed"],
+            ["ahmed ", "ahmed"],
+            ["ahmed", "ahmed"],
+        ];
+    }
+
+    public function getDataForMd5()
+    {
+        return [
+            ["ahmed", "9193ce3b31332b03f7d8af056c692b84"],
+            ["saeed", "849e060f05808577361b084ba1e3eca7"]
+        ];
+    }
+
+    public function getDataForSha512()
+    {
+        return [
+            ["ahmed", "ca1c9d326c06d53665e00de7c70a750f314a260766146c2f8b3c44be937503382711d0ed8130631fead8a3dc6608d03e48ebefeef37cbb650c72a9af003ec5a9"],
+            ["saeed", "0225c78dcb5e845ddb7da5683839cc62aecf020dd7c16e71672c29a062b506d6fd1cc6758613435964052b81c1cf148a12eca3bf02f92ac5f2725b9578379e96"]
         ];
     }
 }
