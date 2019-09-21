@@ -18,7 +18,13 @@ class CountryValidator extends LaravelValidator
      * @var array
      */
     protected $rules = [
-        ValidatorInterface::RULE_CREATE => [],
-        ValidatorInterface::RULE_UPDATE => [],
+        ValidatorInterface::RULE_CREATE => [
+            'name' => 'required',
+            'code' => 'required|unique:countries,code'
+        ],
+        ValidatorInterface::RULE_UPDATE => [
+            'name' => 'required',
+            'code' => 'required'
+        ],
     ];
 }
