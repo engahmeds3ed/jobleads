@@ -16,5 +16,9 @@ use \Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('countries/datatable', 'CountriesController@datatableList')->name('countries.datatable');
 Route::resource('countries', 'CountriesController');
+
+Route::get('states/datatable', 'StatesController@datatableList')->name('states.datatable');
+Route::resource('states', 'StatesController');
