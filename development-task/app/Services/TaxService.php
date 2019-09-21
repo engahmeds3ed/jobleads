@@ -95,4 +95,29 @@ class TaxService
         return $this->taxes->delete($tax->id);
     }
 
+    public function prepareDataForExport()
+    {
+        $output = collect([]);
+        $output->push( collect([["County Name", "County Code", "State Name", "State Code", "Country Name", "Country Code", "Tax Rate", "Tax Rate Code", "Tax Amount"]]) );
+        $taxes = $this->all(['paginate' => false]);
+        if(!empty($taxes)){
+            foreach ($taxes as $tax)
+            {
+                $thisTax = collect([
+                    $tax->county->name,
+                    $tax->county->code,
+                    $tax->county->state->name,
+                    $tax->county->state->code,
+                    $tax->county->state->country->name,
+                    $tax->county->state->country->code,
+                    $tax->taxrate->name,
+                    $tax->taxrate->code,
+                    $tax->amount
+                    ]);
+                $output->push($thisTax);
+            }
+        }
+        return $output;
+    }
+
 }

@@ -27,4 +27,9 @@ class Tax extends Model implements Transformable
         return $this->belongsTo(County::class);
     }
 
+    public function taxrate()
+    {
+        return $this->belongsTo(Taxrate::class);
+    }
+
 }

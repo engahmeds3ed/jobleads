@@ -35,6 +35,9 @@ Route::group([
     Route::resource('taxrates', 'TaxratesController');
 
     Route::get('taxes/datatable', 'TaxesController@datatableList')->name('taxes.datatable');
-    Route::resource('taxes', 'TaxesController');
+    Route::get('taxes/data', 'DataController@importExportView')->name('taxes.data');
+    Route::get('taxes/data/export', 'DataController@export')->name('taxes.data.export');
+    Route::post('taxes/data/import', 'DataController@import')->name('taxes.data.import');
 
+    Route::resource('taxes', 'TaxesController');
 });
