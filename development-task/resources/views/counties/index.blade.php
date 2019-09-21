@@ -23,6 +23,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Code</th>
+                            <th>Tax Rate Average</th>
                             <th>State</th>
                             <th>Country</th>
                             <th>Edit</th>
@@ -34,6 +35,7 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Code</th>
+                            <th>Tax Rate Average</th>
                             <th>State</th>
                             <th>Country</th>
                             <th>Edit</th>

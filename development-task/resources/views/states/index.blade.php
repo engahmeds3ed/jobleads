@@ -24,6 +24,8 @@
                             <th>Name</th>
                             <th>Code</th>
                             <th>Country</th>
+                            <th>Tax Amount</th>
+                            <th>Tax Amount Average</th>
                             <th>Edit</th>
                             <th>Delete</th>
                             </thead>
@@ -34,6 +36,8 @@
                             <th>Name</th>
                             <th>Code</th>
                             <th>Country</th>
+                            <th>Tax Amount</th>
+                            <th>Tax Amount Average</th>
                             <th>Edit</th>
                             <th>Delete</th>
                             </tfoot>

@@ -23,6 +23,8 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Code</th>
+                            <th>Tax Rate Average</th>
+                            <th>Tax Total Amount</th>
                             <th>Edit</th>
                             <th>Delete</th>
                             </thead>
@@ -32,6 +34,8 @@
                             <th>#</th>
                             <th>Name</th>
                             <th>Code</th>
+                            <th>Tax Rate Average</th>
+                            <th>Tax Total Amount</th>
                             <th>Edit</th>
                             <th>Delete</th>
                             </tfoot>

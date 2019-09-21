@@ -50,6 +50,7 @@ class CountiesController extends Controller
                 $item->id,
                 $item->name,
                 $item->code,
+                $item->taxrates_avg,
                 $item->state->name,
                 $item->state->country->name,
                 "<a href='".route('counties.edit', ['county' => $item->id])."'>Edit</a>",

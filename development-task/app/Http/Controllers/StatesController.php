@@ -51,6 +51,8 @@ class StatesController extends Controller
                 $item->name,
                 $item->code,
                 $item->country->name,
+                $item->taxes_amount,
+                $item->taxes_amount_avg,
                 "<a href='".route('states.edit', ['state' => $item->id])."'>Edit</a>",
                 "<a class='delete' href='".route('states.destroy', ['state' => $item->id])."'>Delete</a>"
             ];

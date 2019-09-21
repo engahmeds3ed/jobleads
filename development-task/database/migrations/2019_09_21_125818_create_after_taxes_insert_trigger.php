@@ -36,12 +36,13 @@ CREATE TRIGGER after_taxes_insert
 		SET states.taxes_amount_avg = innerSelect.taxes_amount_avg;
 	
 		UPDATE counties INNER JOIN (
-			SELECT AVG(taxes.amount) AS taxes_amount_avg, taxes.county_id FROM taxes
+			SELECT AVG(taxrates.amount) AS taxrates_avg, states.country_id FROM taxes
 			INNER JOIN counties ON taxes.county_id = counties.id
+			INNER JOIN taxrates ON taxes.taxrate_id = taxrates.id
 			WHERE counties.id = NEW.county_id
 			GROUP BY counties.id
 		) innerSelect ON counties.id = innerSelect.county_id
-		SET counties.taxes_amount_avg = innerSelect.taxes_amount_avg;
+		SET counties.taxrates_avg = innerSelect.taxrates_avg;
 		
 		UPDATE countries INNER JOIN (
 			SELECT AVG(taxrates.amount) AS taxrates_avg, states.country_id FROM taxes

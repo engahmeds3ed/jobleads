@@ -48,6 +48,8 @@ class CountriesController extends Controller
                 $item->id,
                 $item->name,
                 $item->code,
+                $item->taxrates_avg,
+                $item->taxes_amount,
                 "<a href='".route('countries.edit', ['country' => $item->id])."'>Edit</a>",
                 "<a class='delete' href='".route('countries.destroy', ['country' => $item->id])."'>Delete</a>"
             ];
