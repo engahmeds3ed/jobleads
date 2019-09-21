@@ -58,6 +58,12 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('countries.index') }}">Countries</a>
+                                    <a class="dropdown-item" href="{{ route('states.index') }}">States</a>
+                                    <a class="dropdown-item" href="{{ route('counties.index') }}">Counties</a>
+                                    <a class="dropdown-item" href="{{ route('taxrates.index') }}">Tax Rates</a>
+                                    <a class="dropdown-item" href="{{ route('taxes.index') }}">Taxes</a>
+                                    <a class="dropdown-item" href="#">Import/Export</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

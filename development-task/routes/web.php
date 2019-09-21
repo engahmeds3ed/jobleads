@@ -17,17 +17,22 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('countries/datatable', 'CountriesController@datatableList')->name('countries.datatable');
-Route::resource('countries', 'CountriesController');
+Route::group([
+    'middleware' => 'auth',
+], function ($router) {
+    Route::get('countries/datatable', 'CountriesController@datatableList')->name('countries.datatable');
+    Route::resource('countries', 'CountriesController');
 
-Route::get('states/datatable', 'StatesController@datatableList')->name('states.datatable');
-Route::resource('states', 'StatesController');
+    Route::get('states/datatable', 'StatesController@datatableList')->name('states.datatable');
+    Route::resource('states', 'StatesController');
 
-Route::get('counties/datatable', 'CountiesController@datatableList')->name('counties.datatable');
-Route::resource('counties', 'CountiesController');
+    Route::get('counties/datatable', 'CountiesController@datatableList')->name('counties.datatable');
+    Route::resource('counties', 'CountiesController');
 
-Route::get('taxrates/datatable', 'TaxratesController@datatableList')->name('taxrates.datatable');
-Route::resource('taxrates', 'TaxratesController');
+    Route::get('taxrates/datatable', 'TaxratesController@datatableList')->name('taxrates.datatable');
+    Route::resource('taxrates', 'TaxratesController');
 
-Route::get('taxes/datatable', 'TaxesController@datatableList')->name('taxes.datatable');
-Route::resource('taxes', 'TaxesController');
+    Route::get('taxes/datatable', 'TaxesController@datatableList')->name('taxes.datatable');
+    Route::resource('taxes', 'TaxesController');
+
+});
