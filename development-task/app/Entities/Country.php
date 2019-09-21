@@ -22,4 +22,8 @@ class Country extends Model implements Transformable
      */
     protected $fillable = ["name", "code", "taxes_amount", "taxes_amount_avg", "taxrates_avg"];
 
+    public function states()
+    {
+        return $this->hasMany(State::class);
+    }
 }

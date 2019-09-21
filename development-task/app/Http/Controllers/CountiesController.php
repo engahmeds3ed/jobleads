@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StateCreateRequest;
-use App\Http\Requests\StateUpdateRequest;
+use App\Http\Requests\CountyCreateRequest;
+use App\Http\Requests\CountyUpdateRequest;
 use App\Services\CountryService;
-use App\Services\StateService;
+use App\Services\CountyService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class StatesController extends Controller
+class CountiesController extends Controller
 {
     /**
-     * StatesController constructor.
+     * CountiesController constructor.
      */
-    public function __construct(StateService $stateService, CountryService $countryService)
+    public function __construct(CountyService $countyService, CountryService $countryService)
     {
-        $this->stateService = $stateService;
+        $this->countyService = $countyService;
         $this->countryService = $countryService;
     }
 
@@ -31,15 +31,15 @@ class StatesController extends Controller
             'paginate' => true,
             'per_page' => 10
         ];
-        $items = $this->stateService->all($requestData);
-        return view('states.index', compact('items'));
+        $items = $this->countyService->all($requestData);
+        return view('counties.index', compact('items'));
     }
 
     public function datatableList(Request $request){
         $output = [];
         $allRequest = $request->all();
         $requestData = [];
-        $items = $this->stateService->all($requestData);
+        $items = $this->countyService->all($requestData);
 
         $output['draw'] = ($allRequest['draw'] ?? 0) + 1;
         $output['recordsTotal'] = $items->count();
@@ -50,9 +50,10 @@ class StatesController extends Controller
                 $item->id,
                 $item->name,
                 $item->code,
-                $item->country->name,
-                "<a href='".route('states.edit', ['state' => $item->id])."'>Edit</a>",
-                "<a class='delete' href='".route('states.destroy', ['state' => $item->id])."'>Delete</a>"
+                $item->state->name,
+                $item->state->country->name,
+                "<a href='".route('counties.edit', ['county' => $item->id])."'>Edit</a>",
+                "<a class='delete' href='".route('counties.destroy', ['county' => $item->id])."'>Delete</a>"
             ];
         }
 
@@ -61,23 +62,23 @@ class StatesController extends Controller
 
     public function create(Request $request)
     {
-        $countries = $this->countryService->namedIDvalues();
-        return view('states.new', compact('countries'));
+        $countries = $this->countryService->all(['paginate' => false]);
+        return view('counties.new', compact('countries'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StateCreateRequest $request
+     * @param  CountyCreateRequest $request
      *
      * @return \Illuminate\Http\Response
      *
      */
-    public function store(StateCreateRequest $request)
+    public function store(CountyCreateRequest $request)
     {
         try {
 
-            $item = $this->stateService->create($request->all());
+            $item = $this->countyService->create($request->all());
 
             $response = [
                 'message' => 'Item created.',
@@ -103,7 +104,7 @@ class StatesController extends Controller
      */
     public function show($id)
     {
-        $item = $this->stateService->find($id);
+        $item = $this->countyService->find($id);
 
         if (request()->wantsJson()) {
             return response()->json([
@@ -111,7 +112,7 @@ class StatesController extends Controller
             ]);
         }
 
-        return view('states.show', compact('item'));
+        return view('counties.show', compact('item'));
     }
 
     /**
@@ -123,26 +124,26 @@ class StatesController extends Controller
      */
     public function edit($id)
     {
-        $item = $this->stateService->find($id);
-        $countries = $this->countryService->namedIDvalues();
+        $item = $this->countyService->find($id);
+        $countries = $this->countryService->all(['paginate' => false]);
 
-        return view('states.edit', compact('item', 'countries'));
+        return view('counties.edit', compact('item', 'countries'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  StateUpdateRequest $request
+     * @param  CountyUpdateRequest $request
      * @param  string            $id
      *
      * @return Response
      *
      * @throws \Prettus\Validator\Exceptions\ValidatorException
      */
-    public function update(StateUpdateRequest $request, $id)
+    public function update(CountyUpdateRequest $request, $id)
     {
         try {
-            $item = $this->stateService->update($request->all(), $id);
+            $item = $this->countyService->update($request->all(), $id);
 
             $response = [
                 'message' => 'Item updated successfully',
@@ -169,7 +170,7 @@ class StatesController extends Controller
      */
     public function destroy($id)
     {
-        $deleted = $this->stateService->delete($id);
+        $deleted = $this->countyService->delete($id);
 
         if (request()->wantsJson()) {
             return response()->json([
