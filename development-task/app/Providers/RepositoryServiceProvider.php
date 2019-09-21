@@ -28,6 +28,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(\App\Repositories\StateRepository::class, \App\Repositories\StateRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\CountyRepository::class, \App\Repositories\CountyRepositoryEloquent::class);
         $this->app->bind(\App\Repositories\TaxrateRepository::class, \App\Repositories\TaxrateRepositoryEloquent::class);
+        $this->app->bind(\App\Repositories\TaxRepository::class, \App\Repositories\TaxRepositoryEloquent::class);
         //:end-bindings:
     }
 }

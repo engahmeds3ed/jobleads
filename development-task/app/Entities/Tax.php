@@ -7,11 +7,11 @@ use Prettus\Repository\Contracts\Transformable;
 use Prettus\Repository\Traits\TransformableTrait;
 
 /**
- * Class State.
+ * Class Tax.
  *
  * @package namespace App\Entities;
  */
-class State extends Model implements Transformable
+class Tax extends Model implements Transformable
 {
     use TransformableTrait;
 
@@ -20,16 +20,11 @@ class State extends Model implements Transformable
      *
      * @var array
      */
-    protected $fillable = ["country_id", "name", "code", "taxes_amount", "taxes_amount_avg", "taxrates_avg"];
+    protected $fillable = ["taxrate_id", "county_id", "amount"];
 
-    public function country()
+    public function county()
     {
-        return $this->belongsTo(Country::class);
-    }
-
-    public function counties()
-    {
-        return $this->hasMany(County::class);
+        return $this->belongsTo(County::class);
     }
 
 }
