@@ -2,18 +2,18 @@
 
 namespace App\Services;
 
-use App\Entities\County;
+use App\Entities\Taxrate;
 use App\Helpers\DataHelper;
-use App\Repositories\CountyRepository;
+use App\Repositories\TaxrateRepository;
 use Illuminate\Support\Facades\Log;
 
-class CountyService
+class TaxrateService
 {
-    protected $counties;
+    protected $taxrates;
 
-    public function __construct(CountyRepository $counties)
+    public function __construct(TaxrateRepository $taxrates)
     {
-        $this->counties = $counties;
+        $this->taxrates = $taxrates;
     }
 
     public function all(array $params = [])
@@ -21,7 +21,7 @@ class CountyService
         $perPage = $params['per_page'] ?? 10;
         $paginate = $params['paginate'] ?? true;
 
-        $query = $this->counties;
+        $query = $this->taxrates;
 
         if($paginate == true) {
             $collection = $query->paginate($perPage);
@@ -42,62 +42,62 @@ class CountyService
         return $output;
     }
 
-    public function find(int $id):County
+    public function find(int $id):Taxrate
     {
-        return $this->counties->find($id);
+        return $this->taxrates->find($id);
     }
 
-    public function getCountyBy($field, $value){
-        return $this->counties->findByField($field, $value);
+    public function getTaxrateBy($field, $value){
+        return $this->taxrates->findByField($field, $value);
     }
 
-    public function getCountyByCode($code)
+    public function getTaxrateByCode($code)
     {
-        return $this->getCountyBy("code", $code);
+        return $this->getTaxrateBy("code", $code);
     }
 
     /**
-     * Create new County
+     * Create new Taxrate
      * @param array $attributes
-     * @return County
+     * @return Taxrate
      */
-    public function create(array $attributes):County
+    public function create(array $attributes):Taxrate
     {
-        $county = new County();
+        $taxrate = new Taxrate();
 
-        $allowedAttr = $county->getFillable();
+        $allowedAttr = $taxrate->getFillable();
         $createArgs = DataHelper::filterArrayWithKeys($attributes, $allowedAttr);
         try {
-            $county = $this->counties->create($createArgs);
+            $taxrate = $this->taxrates->create($createArgs);
         } catch (\Exception $e) {
             Log::error($e);
         }
-        return $county;
+        return $taxrate;
     }
 
     /**
-     * Update County
+     * Update Taxrate
      * @param  array  $attributes
-     * @return State
+     * @return Taxrate
      */
-    public function update(array $attributes, int $id):County
+    public function update(array $attributes, int $id):Taxrate
     {
-        $county = $this->find($id);
+        $taxrate = $this->find($id);
 
-        $allowedAttr = $county->getFillable();
+        $allowedAttr = $taxrate->getFillable();
         $updateArgs = DataHelper::filterArrayWithKeys($attributes, $allowedAttr);
         try {
-            $county = $this->counties->update($updateArgs, $id);
+            $taxrate = $this->taxrates->update($updateArgs, $taxrate->id);
         } catch (\Exception $e) {
             Log::error($e);
         }
-        return $county;
+        return $taxrate;
     }
 
     public function delete(int $id):bool
     {
-        $county = $this->find($id);
-        return $this->counties->delete($county->id);
+        $taxrate = $this->find($id);
+        return $this->taxrates->delete($taxrate->id);
     }
 
 }

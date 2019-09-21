@@ -25,3 +25,6 @@ Route::resource('states', 'StatesController');
 
 Route::get('counties/datatable', 'CountiesController@datatableList')->name('counties.datatable');
 Route::resource('counties', 'CountiesController');
+
+Route::get('taxrates/datatable', 'TaxratesController@datatableList')->name('taxrates.datatable');
+Route::resource('taxrates', 'TaxratesController');
