@@ -10,7 +10,7 @@ $(document).ready( function () {
         });
     }
 
-    $(document).on('click', '.delete', function(){
+    $(document).on('click', '.datatable .delete', function(){
         var confirmed = confirm("Are you sure that you want to delete this record?");
         if(confirmed){
             var thisButton = $(this);
@@ -22,7 +22,7 @@ $(document).ready( function () {
                     "Content-Type": "application/json; charset=utf-8",
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                success: function(msg){
+                success: function(){
                     thisButton.parents('tr').remove();
                 }
             });

@@ -26,7 +26,7 @@ class CountryUpdateRequest extends FormRequest
         $item_id = $this->route()->parameter('country');
         return [
             'name' => 'required',
-            'code' => 'required,unique:countries,code,'.$item_id
+            'code' => 'required|unique:countries,code,'.$item_id
         ];
     }
 }

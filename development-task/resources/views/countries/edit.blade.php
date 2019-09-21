@@ -1,39 +1,49 @@
-@extends('admin.adminbase')
+@extends('layouts.app')
 
 @section('content')
-<div dir="ltr" class="content">
-        @if(\Illuminate\Support\Facades\Session::has('message'))
-            <div>{{ \Illuminate\Support\Facades\Session::get('message') }}</div>
-        @endif
-        <form method="POST" action="{{route('page.update', [$item->id])}}" enctype="multipart/form-data">
-            @csrf
-            @method('put')
-            <label>
-            Page Name in Arabic
-                <input type="text" name="name:ar" value="{{$item->name_ar}}"  class="ar">
-            </label>
-            <label>
-            Page name in english
-                <input type="text" name="name:en" value="{{$item->name_en}}" class="en">
-            </label>
-            <label>
-            Page content in arabic
-                <textarea name="content:ar"  class="ar">{{$item->content_ar}}</textarea>
-            </label>
-            <label>
-                page conent in english
-                <textarea name="content:en" class="en">{{$item->content_en}}</textarea>
-            </label>
-            <label>
-            Page background
-                <input type="file" name="image" class="en">
-                <a href="{{route('page.image', $item->id)}}" target="_blank"  class="ar">preview</a>
-            </label>
-            <label>
-        Active?
-                <input type="checkbox" name="status" value="1" @if($item->status) checked @endif>
-            </label>
-            <input type="submit" class="btns arbtn w-button" value="Save">
-        </form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        Countries
+                        <a href="{{route('countries.index')}}" class="float-right btn btn-sm btn-info">Back to List</a>
+                    </div>
+                    <div class="card-body">
+                        @if(\Illuminate\Support\Facades\Session::has('message'))
+                            <div class="alert alert-info">{{ \Illuminate\Support\Facades\Session::get('message') }}</div>
+                        @endif
+
+                        <form method="post" action="{{route('countries.update', [$item->id])}}" enctype="multipart/form-data">
+                            @csrf
+                            @method("patch")
+                            <div class="form-group">
+                                <label for="country_name">Name</label>
+                                <input id="country_name" type="text" name="name" value="{{old('name', $item->name)}}" class="form-control">
+                                @if ($errors->has('name'))
+                                    <div class="alert alert-danger">
+                                        {{ $errors->first('name') }}
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="form-group">
+                                <label for="country_code">Code</label>
+                                <input id="country_code" type="text" name="code" value="{{old('code', $item->code)}}" class="form-control">
+                                @if ($errors->has('code'))
+                                    <div class="alert alert-danger">
+                                        {{ $errors->first('code') }}
+                                    </div>
+                                @endif
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-primary" value="Update Item">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
