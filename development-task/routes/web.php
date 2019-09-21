@@ -20,6 +20,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group([
     'middleware' => 'auth',
 ], function ($router) {
+    Route::get('/', 'HomeController@index')->name('home');
+
     Route::get('countries/datatable', 'CountriesController@datatableList')->name('countries.datatable');
     Route::resource('countries', 'CountriesController');
 
