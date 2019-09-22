@@ -98,7 +98,20 @@ class TaxService
     public function prepareDataForExport()
     {
         $output = collect([]);
-        $output->push( collect([["County Name", "County Code", "State Name", "State Code", "Country Name", "Country Code", "Tax Rate", "Tax Rate Code", "Tax Amount"]]) );
+        $output->push( collect(
+            [
+                "County Name",
+                "County Code",
+                "State Name",
+                "State Code",
+                "Country Name",
+                "Country Code",
+                "Tax Rate",
+                "Tax Rate Code",
+                "Tax Rate Percentage",
+                "Tax Amount"
+            ]
+        ) );
         $taxes = $this->all(['paginate' => false]);
         if(!empty($taxes)){
             foreach ($taxes as $tax)
@@ -112,6 +125,7 @@ class TaxService
                     $tax->county->state->country->code,
                     $tax->taxrate->name,
                     $tax->taxrate->code,
+                    $tax->taxrate->amount,
                     $tax->amount
                     ]);
                 $output->push($thisTax);
